@@ -28,6 +28,13 @@ public class EquipmentEntity extends DateEntity {
         this.status = status;
         this.category = category;
     }
+
+
+    public EquipmentEntity(Long mgmNum, Status status, Category category) {
+        this.mgmNum = mgmNum;
+        this.status = status;
+        this.category = category;
+    }
 }
 
 

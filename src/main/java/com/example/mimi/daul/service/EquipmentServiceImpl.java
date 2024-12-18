@@ -31,7 +31,7 @@ public class EquipmentServiceImpl implements EquipmentSerivce {
 
     @Override
     public void update(EquipmentEntity dto) {
-equipmentDAO.update(dto);
+        equipmentDAO.update(dto);
     }
 
     @Override
