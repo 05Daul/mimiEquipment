@@ -1,9 +1,9 @@
 server:
-  port: 5678
+  port: 5680
 
 spring:
   application:
-    name: mimi
+    name: Equipmemt
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -14,7 +14,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      # ddl-auto: create
+     # ddl-auto: create
       ddl-auto: none
 
     properties:
@@ -31,3 +31,19 @@ logging:
           descriptor:
             sql: trace
 
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      #      defaultZone: http://192.168.0.7:8761/eureka
+      defaultZone: http://127.0.0.1:5677/eureka
+
+  instance:
+    #2???????? ??????? ?????? ??
+    lease-expiration-duration-in-seconds: 2
+    #?????? 1???? ????? ??
+    #lease-renewal-interval-in-seconds: 1
+file:
+  dir: ${user.home}/fullstack7/upload/
