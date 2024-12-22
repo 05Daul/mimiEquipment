@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: Equipmemt
+    name: mimi-equipmemt
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
