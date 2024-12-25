@@ -1,49 +1,75 @@
 package com.example.mimi.daul.dao;
 
+import com.example.mimi.daul.EquipmentRepository;
 import com.example.mimi.daul.entity.Category;
 import com.example.mimi.daul.entity.EquipmentEntity;
 import com.example.mimi.daul.entity.Status;
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 @RequiredArgsConstructor
+@Repository
 public class EquipmentDAOImpl implements EquipmentDAO {
-    private final EntityManager em;
+private final EquipmentRepository repository;
 
     @Override
-    public void insert(String mgmNum, String statusStr, String categoryStr) {
+    public void insert(String serialNum, String statusStr, String categoryStr) {
         Status status = Status.valueOf(statusStr);
         Category category = Category.valueOf(categoryStr);
-        em.persist(new EquipmentEntity(mgmNum, status, category));
+        repository.save(new EquipmentEntity(serialNum, status, category));
     }
+
 
     @Override
     public EquipmentEntity findByMgmNum(Long MgmNum) {
-        return em.find(EquipmentEntity.class, MgmNum);
+        return repository.findById(MgmNum).orElse(null);
+
     }
 
     @Override
     public void delete(Long mgmNum) {
-        EquipmentEntity delete = em.find(EquipmentEntity.class, mgmNum);
-        em.remove(delete);
+        EquipmentEntity delete = findByMgmNum(mgmNum);
+        repository.delete(delete);
+    }
 
+    @Override
+    public List<EquipmentEntity> findstock(Status status,Category category) {
+        return repository.findByStatus(status,category);
+    }
+
+    @Override
+    public int findintstock(Status status, Category category) {
+        return repository.findintstock(status,category);
     }
 
     @Override
     public void update(EquipmentEntity dto) {
-        EquipmentEntity update = em.find(EquipmentEntity.class, dto.getMgmNum());
+        EquipmentEntity update = findByMgmNum(dto.getMgmNum());
         update.setSerialNum(dto.getSerialNum());
         update.setCategory(dto.getCategory());
         update.setStatus(dto.getStatus());
+        repository.save(update);
+    }
+
+    @Override
+    public void updateSerialNum(EquipmentEntity dto) {
+        EquipmentEntity updateSerialNum = findByMgmNum(dto.getMgmNum());
+        updateSerialNum.setSerialNum(dto.getSerialNum());
+        repository.save(updateSerialNum);
+    }
+
+    @Override
+    public void updateStatus(EquipmentEntity dto) {
+        EquipmentEntity updateStatus = findByMgmNum(dto.getMgmNum());
+        updateStatus.setStatus(dto.getStatus());
+        repository.save(updateStatus);
     }
 
     @Override
     public List<EquipmentEntity> findAll() {
-        List<EquipmentEntity> list = em.createQuery("select e from EquipmentEntity e", EquipmentEntity.class).getResultList();
-        return list;
+        return repository.findAll();
     }
+
 }

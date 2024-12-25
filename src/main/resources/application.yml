@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: Equipmemt
+    name: mimi-equipment
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -37,13 +37,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      #      defaultZone: http://192.168.0.7:8761/eureka
       defaultZone: http://127.0.0.1:5677/eureka
 
-  instance:
-    #2???????? ??????? ?????? ??
-    lease-expiration-duration-in-seconds: 2
-    #?????? 1???? ????? ??
-    #lease-renewal-interval-in-seconds: 1
-file:
-  dir: ${user.home}/fullstack7/upload/
+#  instance:
+#    lease-expiration-duration-in-seconds: 2
