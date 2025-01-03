@@ -27,11 +27,18 @@ public class EquipmentRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body("su");
     }
 
-    @PostMapping("/findByMgmNum")
-    public ResponseEntity<EquipmentEntity> findByMgmNum(@RequestParam("mgmNum") String mgmNum) {
-        EquipmentEntity equipment = equipmentService.findByMgmNum(mgmNum);
+//    @PostMapping("/findByMgmNum")
+//    public ResponseEntity<EquipmentEntity> findByMgmNum(@RequestParam("mgmNum") String mgmNum) {
+//        EquipmentEntity equipment = equipmentService.findByMgmNum(mgmNum);
+//
+//        return ResponseEntity.ok(equipment);
+//    }
+    @GetMapping("/findbymgmnum/{mgmnum}")
+    public ResponseEquipmentDTO findByMgmNum(@PathVariable String mgmnum) {
+        EquipmentEntity equipment = equipmentService.findByMgmNum(mgmnum);
+        ResponseEquipmentDTO responseEquipmentDTO = new ResponseEquipmentDTO(equipment.getMgmNum(),equipment.getSerialNum(), equipment.getStatus(),equipment.getCategory());
+        return responseEquipmentDTO;
 
-        return ResponseEntity.ok(equipment);
     }
 
 
