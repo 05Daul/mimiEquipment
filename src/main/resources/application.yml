@@ -7,7 +7,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/mimi?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://10.104.200.22:3306/mimi?serverTimezone=Asia/Seoul
     username: mytest
     password: 1234
 
@@ -15,7 +15,9 @@ spring:
     show-sql: true
     hibernate:
      # ddl-auto: create
-      ddl-auto: none
+     # ddl-auto: none
+      ddl-auto: update
+
 
     properties:
       hibernate:
@@ -26,18 +28,18 @@ logging:
   level:
     org:
       hibernate:
+        #
+        #eureka:
+        #  client:
+        #    fetch-registry: true
+        #    register-with-eureka: true
+        #    service-url:
+        #      defaultZone: http://127.0.0.1:8761/eureka
         sql: debug
         type:
           descriptor:
             sql: trace
 
-
-eureka:
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://127.0.0.1:8761/eureka
 
 #  instance:
 #    lease-expiration-duration-in-seconds: 2
